@@ -1,13 +1,21 @@
 import re
 import os
 import openai
+import logging
 
 from config_data.config import load_config
 
+# Настройка логирования
+logging.basicConfig(level=logging.INFO,
+                    format='#%(levelname)-8s [%(name)s]: '
+                    '%(lineno)d - %(message)s')
+logger = logging.getLogger(__name__)
 
+# Загрузка конфигурации
 config = load_config()
-openai.api_key = config.openai.token
 
+# Настройка Openai API
+openai.api_key = config.openai.token
 client = openai.OpenAI()
 os.environ['OPENAI_API_KEY'] = config.openai.token
 
