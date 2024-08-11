@@ -1,6 +1,18 @@
 import re
+import os
+import openai
+
+from config_data.config import load_config
 
 
+config = load_config()
+openai.api_key = config.openai.token
+
+client = openai.OpenAI()
+os.environ['OPENAI_API_KEY'] = config.openai.token
+
+
+# Поиск документов по FAISS
 def search_documents(query, db, k=4, verbose=False):
     """Возвращает наиболее релевантные документы для заданного запроса"""
     separator = '\n=================================================='
@@ -13,3 +25,21 @@ def search_documents(query, db, k=4, verbose=False):
     if verbose:
         print(separator)
     return message_content
+
+
+# Model I
+def answer_index(system, user, db, k=4, verbose=True):
+    """Возвращает ответ на запрос пользователя"""
+    docs = search_documents(user, db, k=k, verbose=verbose)
+
+    user_query = f'Документы с информацией: \n{docs}'
+    '\n\nВопрос пользователя: {user}'
+
+    completions = client.chat.completions.create(
+        model='gpt-3.5-turbo',
+        messages=[
+            {'role': 'system', 'content': system},
+            {'role': 'user', 'content': user_query}
+        ]
+    )
+    return completions.choices[0].message.content
