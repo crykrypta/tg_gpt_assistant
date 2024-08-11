@@ -90,6 +90,3 @@ def split_text_to_chunks(text: str, max_count) -> list[str]:
 
 # Выводим длины
 chunks = split_text_to_chunks(url_to_mkd(doc_url), 2000)
-
-
-_plot_by_tokens(chunks, 'cl100k_base')

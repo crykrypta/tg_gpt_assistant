@@ -1,8 +1,20 @@
-from langchain.vectorstores import FAISS
-from langchain.embeddings import OpenAIEmbeddings
+import os
+import sys
+sys.path.append(os.path.join(os.getcwd(), 'GPT_assist')) # type: ignore
+
+import openai
+
+from langchain_community.vectorstores import FAISS
+from langchain_openai import OpenAIEmbeddings
 
 from utils.for_text import url_to_mkd, split_text_to_chunks
+from config_data.config import load_config
 
+
+config = load_config()
+
+openai.api_key = config.openai.token
+os.environ['OPENAI_API_KEY'] = config.openai.token
 
 # Получаем хранилище с чанками
 doc_url = 'https://docs.google.com/document/d/1YhUEX9fZDNTeE3eJ-yXskxZG46LsTRYvXjZ9Ij-t3Gw/edit'
