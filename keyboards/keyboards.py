@@ -8,6 +8,8 @@ buttons: dict[str, InlineKeyboardButton] = {
                                     callback_data='to_main'),
     'help': InlineKeyboardButton(text=lexicon_ru.buttons['help'],
                                  callback_data='help'),
+    'my_docs': InlineKeyboardButton(text=lexicon_ru.buttons['my_docs'],
+                                    callback_data='my_docs'),
 }
 
 
@@ -26,7 +28,8 @@ main_kb = InlineKeyboardMarkup(
                               callback_data='load_google_doc')],
         [InlineKeyboardButton(text=lexicon_ru.buttons['load_PDF'],
                               callback_data='load_PDF')],
-        [buttons['help'], buttons['to_main']]
+        [buttons['my_docs']],
+        [buttons['help']]
     ]
 )
 
