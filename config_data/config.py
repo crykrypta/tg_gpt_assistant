@@ -24,6 +24,5 @@ def load_config(path: str | None = None) -> Config:
 
     return Config(
         tg_bot=TgBot(token=env('BOT_TOKEN')),
-        openai=OpenAI(token=env('OPENAI_TOKEN'))
+        openai=OpenAI(token=env('OPENAI_API_KEY'))
     )
-

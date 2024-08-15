@@ -6,14 +6,13 @@ from aiogram.types import Message, CallbackQuery
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 
+from lexicon import lexicon_ru
+from keyboards import keyboards as kb
+
 
 class Loading(StatesGroup):
     google_doc_url = State()
     pdf_file = State()
-
-
-from lexicon import lexicon_ru
-from keyboards import keyboards as kb
 
 
 # Настройка логирования
