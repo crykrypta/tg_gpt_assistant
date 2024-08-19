@@ -9,6 +9,8 @@ from aiogram.fsm.state import State, StatesGroup
 from lexicon import lexicon_ru
 from keyboards import keyboards as kb
 
+import db.requests as rq
+
 
 class Loading(StatesGroup):
     google_doc_url = State()
@@ -31,11 +33,15 @@ router = Router()
 # /start
 @router.message(CommandStart())
 async def cmd_start(message: Message):
+    # Ответ по лексикону
     await message.answer(
         text=lexicon_ru.commands['/start'].format(message.from_user.full_name),
         reply_markup=kb.start_kb,
         parse_mode='html'
     )
+    #  Добавление пользователя в БД
+    await rq.set_user(tg_id=message.from_user.id,
+                      name=message.from_user.full_name)
 
 
 # /help

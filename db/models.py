@@ -5,7 +5,7 @@ from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 
 # Инициализация движка
 engine = create_async_engine(
-    url='sqlite+aiosqlite://db.sqlite3',
+    url='sqlite+aiosqlite:///db/db.sqlite3',
     echo=True
 )
 
