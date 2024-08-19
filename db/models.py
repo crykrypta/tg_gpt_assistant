@@ -2,14 +2,13 @@ from sqlalchemy import BigInteger, ForeignKey, String
 from sqlalchemy.orm import DeclarativeBase, mapped_column, Mapped
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 
-
 from config_data.config import load_config
 
 config = load_config()
 
 # Инициализация движка
 engine = create_async_engine(
-    url=config.db.pg_url,
+    url=config.db.sqlite_url,
     echo=True
 )
 

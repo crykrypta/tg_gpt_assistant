@@ -34,6 +34,6 @@ def load_config(path: str | None = None) -> Config:
     return Config(
         tg_bot=TgBot(token=env('BOT_TOKEN')),
         openai=OpenAI(token=env('OPENAI_API_KEY')),
-        db=Database(pg_url=env('PG_URL'))
+        db=Database(pg_url=env('PG_URL'),
+                    sqlite_url=env('SQLITE_URL'))
     )
-    
