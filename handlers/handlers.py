@@ -53,10 +53,9 @@ async def cmd_help(message: Message):
 # /salam
 @router.message(Command(commands='salam'))
 async def cmd_salam(message: Message):
-    name = rq.get_name()
+    name = await rq.get_name(message.from_user.id)
     await message.answer(
-        text=f'Ваалейкум ас-саляму ва-рахмату ва-баракатуху {name}!' /
-        '\n\nИуууууу'
+        text=f'Ваалейкум ас-саляму ва-рахмату ва-баракатуху {name}!'
     )
 
 # ----------------Callback Handlers----------------------- #
