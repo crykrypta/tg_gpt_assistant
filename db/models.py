@@ -4,6 +4,7 @@ from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 
 from config_data.config import load_config
 
+# Загрузка конфигурации
 config = load_config()
 
 # Инициализация движка
@@ -32,7 +33,7 @@ class User(Base):
 class Doc(Base):
     __tablename__ = 'docs'
     id: Mapped[int] = mapped_column(primary_key=True)
-    user_id: Mapped[int] = mapped_column(ForeignKey('users.id'))
+    user_tid: Mapped[int] = mapped_column(ForeignKey('users.tg_id'))
 
 
 # Функция инициализации базы данных

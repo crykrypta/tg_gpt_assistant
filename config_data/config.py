@@ -15,6 +15,7 @@ class OpenAI:
 @dataclass
 class Database:
     pg_url: str
+    sqlite_url: str
 
 
 @dataclass
@@ -35,5 +36,7 @@ def load_config(path: str | None = None) -> Config:
         tg_bot=TgBot(token=env('BOT_TOKEN')),
         openai=OpenAI(token=env('OPENAI_API_KEY')),
         db=Database(pg_url=env('PG_URL'),
-                    sqlite_url=env('SQLITE_URL'))
+                    sqlite_url=env('SQLITE_URL')
+        )
     )
+

@@ -15,3 +15,12 @@ async def set_user(tg_id: int, name: str) -> None:
             if not user:
                 session.add(User(tg_id=tg_id, name=name))
                 await session.commit()
+
+
+async def get_name(tg_id: int) -> str:
+    async with async_session() as session:
+        async with session.begin():
+            username = await session.scalar(
+                select(User.name).where(User.tg_id == tg_id)
+            )
+            return username
