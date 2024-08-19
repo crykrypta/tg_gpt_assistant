@@ -3,9 +3,13 @@ from sqlalchemy.orm import DeclarativeBase, mapped_column, Mapped
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 
 
+from config_data.config import load_config
+
+config = load_config()
+
 # Инициализация движка
 engine = create_async_engine(
-    url='sqlite+aiosqlite:///db/db.sqlite3',
+    url=config.db.pg_url,
     echo=True
 )
 
@@ -32,6 +36,7 @@ class Doc(Base):
     user_id: Mapped[int] = mapped_column(ForeignKey('users.id'))
 
 
+# Функция инициализации базы данных
 async def async_main():
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
